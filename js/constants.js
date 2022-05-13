@@ -12,6 +12,8 @@ const gridR = 20,
       yDegree = Math.PI / 6,
       zDegree = Math.PI * 3 / 2;
 
+const rand = (n) => Math.floor(Math.random() * n)
+      
 const step = [[1, 0, -1], [0, 1, -1], [-1, 1, 0],
               [-1, 0, 1], [0, -1, 1], [1, -1, 0]];
 
