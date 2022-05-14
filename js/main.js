@@ -1,13 +1,13 @@
 const canvas = document.getElementById("canvas"),
       ctx = canvas.getContext("2d");
 
-let gridSize = 6,
+let gridSize = 3,
     gridDistance = {},
     gridPos = {},
     gridStone = {},
     monsterPos = [],
     lastPos = [0, 0, 0],
-    stoneRand = 6;      
+    stoneRand = 3;      
     
 function settingGrid(pos) {
     const coordinate = pos;
@@ -46,15 +46,16 @@ function calculateDis(pos) {
 }
 
 function randStone() {
-    // for (let i = 0; i < stoneRand; i++) {
-    //     let pos = gridPos;
-    //     gridStone[pos] = 1;
-    //     drawStone(pos, 1);
-    //     calculateDis(pos);
-    // }
-
-    console.log(JSON.stringify(gridPos));
-
+    for (let i = 0; i < stoneRand; i++) {
+        let posList = Object.keys(gridPos).filter(x => !gridStone[x]);
+        let pos = posList[rand(posList.length)].split(',').map(x => parseInt(x));
+        while (pos[0] == monsterPos[0] && pos[1] == monsterPos[1] && pos[2] == monsterPos[2])
+            pos = posList[rand(posList.length)].split(',').map(x => parseInt(x));
+    
+        gridStone[pos] = 1;
+        drawStone(pos, 1);
+        calculateDis(pos);
+    }
 }
 
 function newGame() {
