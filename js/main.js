@@ -1,13 +1,15 @@
 const canvas = document.getElementById("canvas"),
       ctx = canvas.getContext("2d");
 
-let gridSize = 3,
+let gridSize = 8,
     gridDistance = {},
     gridPos = {},
     gridStone = {},
+    stoneCount = 0,
     monsterPos = [],
     lastPos = [0, 0, 0],
-    stoneRand = 3;      
+    stoneRand = 14,
+    isGameOver = false;      
     
 function settingGrid(pos) {
     const coordinate = pos;
@@ -19,6 +21,10 @@ function settingGrid(pos) {
 
 function monsterMove() {
     let aroundPos = findAroundPos(monsterPos).filter(x => !gridStone[x]);
+    if (!aroundPos.length) {
+        win();
+        return;
+    }
     let minDis = Math.min(...aroundPos.map(x => gridDistance[x]));
     aroundPos = aroundPos.filter(x => gridDistance[x] == minDis);
 
@@ -26,6 +32,9 @@ function monsterMove() {
     monsterPos = aroundPos[rand(aroundPos.length)];
 
     drawMonster(monsterPos);
+
+    if (!gridDistance[monsterPos]) 
+        lost();
 }
 
 function calculateDis(pos) {
@@ -36,7 +45,7 @@ function calculateDis(pos) {
         if (!aroundPos.length)
             return;
         let minDis = Math.min(...aroundPos.map(x => gridDistance[x])) + 1;
-        if (minDis == gridSize * 2)
+        if (minDis == gridSize * gridSize)
             return;
         if (minDis > gridDistance[pos]) {
             gridDistance[pos] = minDis;
@@ -58,6 +67,14 @@ function randStone() {
     }
 }
 
+function lost() {
+    isGameOver = true;
+}
+
+function win() {
+    isGameOver = true;
+}
+
 function newGame() {
     canvas.width = gridR * Math.sqrt(3) * 2 * gridSize + gridR * 3;
     canvas.height = gridR * 4 * gridSize + gridR * 3;
@@ -67,7 +84,10 @@ function newGame() {
 
     gridPos = {};  
     gridStone = {};
+    stoneCount = 0;
     monsterPos = [0, 0, 0];
+    isGameOver = false;
+    
     drawMap();
     drawMonster(monsterPos);
     randStone();

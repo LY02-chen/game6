@@ -11,6 +11,8 @@ const getMousePos = (x, y) => {
 }
 
 function move(event) {
+    if (isGameOver) 
+        return;
     let pos = getMousePos(event.pageX, event.pageY);
     for (let [key, value] of Object.entries(gridPos)) {
         let x = value[0] - pos[0];
@@ -41,7 +43,7 @@ function move(event) {
 }
 
 function down(event) {
-    if (event.button != 0) 
+    if (event.button != 0 || isGameOver) 
         return;
 
     window.removeEventListener("mousemove", move, false);
@@ -52,6 +54,7 @@ function down(event) {
     let dis = Math.sqrt(x * x + y * y);
     if (dis < gridR) {
         gridStone[lastPos] = 1;
+        stoneCount++;
         drawStone(lastPos, 1);
         monsterMove();
         calculateDis(lastPos);

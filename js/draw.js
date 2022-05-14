@@ -18,13 +18,6 @@ function drawGrid(pos) {
     drawHexagon(pos, color["BG"], gridR * 1.1);
     drawHexagon(pos, color["frame"], gridR);
     drawHexagon(pos, color["solid"], gridR * 0.8);
-    if (true) {
-        ctx.font = `${gridR * 0.6}px Comic Sans MS`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = "black";    
-        ctx.fillText(`${gridDistance[pos]}`, hexagonalCoordinate(pos)[0], hexagonalCoordinate(pos)[1]);
-    }
 }
 
 function drawMap() {
