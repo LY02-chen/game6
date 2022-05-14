@@ -1,16 +1,23 @@
 const canvas = document.getElementById("canvas"),
-      ctx = canvas.getContext("2d");
+      ctx = canvas.getContext("2d"),
+      statusbar = document.getElementById("statusbarhold");
 
-let gridSize = 8,
+let gridSize = 6,
     gridDistance = {},
     gridPos = {},
     gridStone = {},
     stoneCount = 0,
     monsterPos = [],
     lastPos = [0, 0, 0],
-    stoneRand = 14,
+    stoneRand = 6,
     isGameOver = false;      
     
+
+function setStatusText() {
+    statusbar.innerText = `Size : ${gridSize}\nInitial stone : ${stoneRand}\n`;
+    statusbar.innerText += `Stone count : ${stoneCount}\n`;
+}
+
 function settingGrid(pos) {
     const coordinate = pos;
     pos = hexagonalCoordinate(pos);
@@ -69,28 +76,34 @@ function randStone() {
 
 function lost() {
     isGameOver = true;
+    setStatusText();
+    statusbar.innerText += "You lost";
 }
 
 function win() {
     isGameOver = true;
+    setStatusText();
+    statusbar.innerText += "You Win";
 }
 
 function newGame() {
     canvas.width = gridR * Math.sqrt(3) * 2 * gridSize + gridR * 3;
     canvas.height = gridR * 4 * gridSize + gridR * 3;
+    statusbar.style.width = canvas.width + "px";
 
     ctx.fillStyle = color["BG"];
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     gridPos = {};  
     gridStone = {};
-    stoneCount = 0;
+    stoneCount = stoneRand;
     monsterPos = [0, 0, 0];
     isGameOver = false;
     
     drawMap();
     drawMonster(monsterPos);
     randStone();
+    setStatusText();
 }
 
 newGame();

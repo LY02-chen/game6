@@ -52,9 +52,10 @@ function down(event) {
     let y = gridPos[lastPos][1] - pos[1];
 
     let dis = Math.sqrt(x * x + y * y);
-    if (dis < gridR) {
+    if (dis < gridR && !gridStone[lastPos]) {
         gridStone[lastPos] = 1;
         stoneCount++;
+        setStatusText();
         drawStone(lastPos, 1);
         monsterMove();
         calculateDis(lastPos);

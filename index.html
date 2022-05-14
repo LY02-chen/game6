@@ -9,13 +9,25 @@
     <script defer src="js/draw.js"></script>
     <script defer src="js/main.js"></script>
     <script defer src="js/mouseEvent.js"></script>
+    <script defer src="js/changSetting.js"></script>
 
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body onselectstart="return false;" oncontextmenu="return false;">
     <div style="display: inline;">
+        <div id="gamesetting" style="text-align: center;">
+            <ul>
+                <p>
+                    <li id="new">New game</li>
+                    Size : <input type="text" id="size" value="6" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                    Initial stone count : <input type="text" id="stonerand" value="6" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                    <input type="button" id="applysetting" value="Apply setting">
+                </p>
+            </ul>
+        </div>
         <div align="center">
             <canvas id="canvas"></canvas>
+            <div id="statusbarhold" style="background: #d0d0d0; text-align: left; font-size: 20px;"></div>
         </div>
     </div>
 </body>
