@@ -4,7 +4,10 @@ const color = {
     "solid": "#ffdcb9",
     "stoneFrame": "#6c6c6c",
     "stoneSolid": "#bebebe",
-    "monster": "#ff0000"
+    "monster": "#8600ff",
+    "horn": "#000000",
+    "eye": "#ffffff",
+    "mouth": "#ffffff",
 }
 
 const gridR = 20,

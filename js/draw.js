@@ -44,9 +44,56 @@ function drawStone(pos, alpha) {
 
 function drawMonster(pos) {
     pos = hexagonalCoordinate(pos);
+    
+    ctx.fillStyle = color["horn"];
+    ctx.beginPath();
+    ctx.moveTo(pos[0] + gridR * 0.5 * Math.cos(Math.PI * 16 / 9), 
+               pos[1] + gridR * 0.5 * Math.sin(Math.PI * 16 / 9));
+    ctx.lineTo(pos[0] + gridR * 0.75 * Math.cos(Math.PI * 15 / 9), 
+               pos[1] + gridR * 0.75 * Math.sin(Math.PI * 15 / 9));
+    ctx.lineTo(pos[0] + gridR * 0.4 * Math.cos(Math.PI * 14 / 9), 
+               pos[1] + gridR * 0.4 * Math.sin(Math.PI * 14 / 9));
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(pos[0] + gridR * 0.5 * Math.cos(Math.PI * 11 / 9), 
+               pos[1] + gridR * 0.5 * Math.sin(Math.PI * 11 / 9));
+    ctx.lineTo(pos[0] + gridR * 0.75 * Math.cos(Math.PI * 12 / 9), 
+               pos[1] + gridR * 0.75 * Math.sin(Math.PI * 12 / 9));
+    ctx.lineTo(pos[0] + gridR * 0.4 * Math.cos(Math.PI * 13 / 9), 
+               pos[1] + gridR * 0.4 * Math.sin(Math.PI * 13 / 9));
+    ctx.closePath();
+    ctx.fill();
+
     ctx.fillStyle = color["monster"];
     ctx.beginPath();
-    ctx.arc(pos[0], pos[1], gridR, 0, Math.PI * 2);
+    ctx.arc(pos[0], pos[1], gridR * 0.5, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = color["eye"];
+    ctx.beginPath();
+    ctx.arc(pos[0] + gridR * 0.25 * Math.cos(Math.PI * 11 / 9),
+            pos[1] + gridR * 0.25 * Math.sin(Math.PI * 11 / 9),
+            gridR * 0.15, Math.PI * 11 / 9, Math.PI * 2 / 9, true);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.beginPath();
+    ctx.arc(pos[0] + gridR * 0.25 * Math.cos(Math.PI * 16 / 9),
+            pos[1] + gridR * 0.25 * Math.sin(Math.PI * 16 / 9),
+            gridR * 0.15, Math.PI * 7 / 9, Math.PI * 16 / 9, true);
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle = color["mouth"];
+    ctx.beginPath();
+    ctx.arc(pos[0], pos[1] + gridR * 0.08, gridR * 0.25, 0, Math.PI);
+    ctx.arc(pos[0], pos[1] - gridR * 0.1, 
+            gridR * Math.sqrt(0.18 * 0.18 + 0.25 * 0.25), 
+            Math.PI - Math.atan(0.18 / 0.25), 
+            Math.atan(0.18 / 0.25), true);
     ctx.closePath();
     ctx.fill();
 }
